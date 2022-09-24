@@ -1,0 +1,426 @@
+/*はみ出た部分をスクロールで追えないようにする*/
+html {
+    overflow: auto;
+}
+header {
+    overflow: hidden;
+}
+/*header内部のCSS*/
+.layer1{
+    position: relative;
+    width: 100%;
+}
+/* テーブル関係*/
+.layer1 .table1{
+    position: absolute;
+    color : #fff;
+    top: 12%;
+    left: 12.3%;
+}
+@media all and (-ms-high-contrast: none){ /*IE用のサイズ調整*/
+    .table1 td a{
+        font-size: calc(16px + 1.5vw);
+    }
+}
+.layer1 p:nth-of-type(2){
+    position: absolute;
+    color: #fff;
+    top: 2%;
+    left: 6%;
+    font-size: calc(16px + 2.5vw);
+    font-weight: bold;
+}
+.layer1 p:nth-of-type(3){
+    position: absolute; 
+    color: #fff;
+    top: 32%;
+    left: 70%;
+    font-size: 3vw;
+    font-weight: bold;
+}
+.headtitle{
+    text-align: center;
+}
+.headtitle:before{
+    content: "";
+    display: inline-block;
+    width: 8vw;
+    height: 6vw;
+    background-image: url(image/TUS_logo.png);
+    background-size: contain;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+}
+.headtitle a, .headtitle a:hover{
+    color: #fff;
+    text-decoration: none;
+}
+/* テーブル関係*/
+.table1{
+    width: 85%;
+    text-align: center;
+}
+nav a:hover{
+    text-decoration: none;
+}
+.table1 td{
+    font-size: calc(112.5% + 1vw);
+    list-style: none;
+    width: 16.6%;
+    float: left;
+}
+header .table1 td a{
+    color: #fff;
+}
+.partition{
+    border-right: solid 1px #fff; 
+}
+.table1 td a:hover{
+    color: #1893ff;
+    opacity: 0.6;
+}
+@media screen and (min-width: 768px){
+    #nav-drawer {
+        display: none;
+    }
+}
+@media screen and (min-width: 1670px){
+    .filter-img{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 1670px){
+    .layer1{
+    left: 50%;
+    }
+    .headtitle, .table1{
+        margin-left: -50%;
+    }
+    .layer1 p:nth-of-type(3){
+        margin-left: -70%;
+    }
+}
+@media screen and (min-width: 767px) and (max-width: 1670px){
+    .filter-img{
+        /*height: 991px;*/
+        max-width: 100%;
+        margin-left: -50%;
+    }
+    #nav-drawer {
+        position: absolute;
+        margin-left: -50%;
+    }
+}
+@media screen and (min-width: 420px) and (max-width: 767px){
+    .filter-img{
+        /*height: 892px;*/
+        max-width: 100%;
+        margin-left: -50%;
+    }
+    .layer1 .table1{
+        position: absolute;
+        color : #fff;
+        top: 12%;
+        text-align: center;
+    }
+    .layer1 .table1{ /*レスポンシブに対応:表示文章を表示しない*/
+        display: none;
+    }
+    .layer1 p:nth-of-type(2){
+        top: 2%;
+        left: 8%;
+    }
+    .layer1 p:nth-of-type(3){
+        font-size: 6vw;
+        left: 30%;
+    }
+    #nav-drawer {
+        position: absolute;
+        margin-left: -50%;
+    }
+}
+@media screen and (max-width: 420px){
+    .filter-img{
+        /*height: 520px;*/
+        max-width: 100%;
+        margin-left: -50%;
+    }
+    .layer1 .table1{
+        display: none;
+    }
+    #nav-drawer {
+        position: absolute;
+        margin-left: -50%;
+    }
+    .layer1 p:nth-of-type(2){
+        top: 3%;
+        left: 10%;
+    }
+    .layer1 p:nth-of-type(3){
+        font-size: 6vw;
+        left: 30%;
+    }
+}
+.filter-img{
+    display: block;
+    overflow: hidden;
+}
+img{
+    max-width: 100%;
+}
+#nav-drawer {
+    position: absolute;
+    left: 2%;
+    top: 2%
+}
+/*チェックボックス等は非表示に*/
+.nav-unshown {
+    display:none;
+}  
+  /*アイコンのスペース*/
+#nav-open {
+    display: inline-block;
+    width: 80px;
+    height:0px;
+}  
+/*ハンバーガーアイコンをCSSだけで表現*/
+#nav-open span, #nav-open span:before, #nav-open span:after {
+    position: absolute;
+    height: 3px;/*線の太さ*/
+    width: 25px;/*長さ*/
+    border-radius: 3px;
+    background: #eeeeee;
+    display: block;
+    content: '';
+    cursor: pointer;
+}
+#nav-open span:before {
+    bottom: -8px;
+}
+#nav-open span:after {
+    bottom: -16px;
+}  
+/*閉じる用の薄黒カバー*/
+#nav-close {
+    display: none;/*はじめは隠しておく*/
+    position: fixed;
+    z-index: 99;
+    top: 0;/*全体に広がるように*/
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0;
+    transition: .3s ease-in-out;
+}  
+/*中身*/
+#nav-content {
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;/*最前面に*/
+    width: 90%;/*右側に隙間を作る*/
+    max-width: 260px;/*最大幅*/
+    height: 100%;
+    background: #eeeeee;/*背景色*/
+    transition: .3s ease-in-out;/*滑らかに表示*/
+    -webkit-transform: translateX(-105%);
+    transform: translateX(-105%);/*左に隠しておく*/
+}  
+/*チェックが入ったらもろもろ表示*/
+#nav-input:checked ~ #nav-close {
+    display: block;/*カバーを表示*/
+    opacity: .5;
+}  
+#nav-input:checked ~ #nav-content {
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);/*中身を表示*/
+    box-shadow: 6px 0 25px rgba(0,0,0,.15);
+}
+#nav-content{
+    border-left: solid 10px #fa0061;
+    overflow: hidden;
+}
+.pos1{
+    position: absolute;
+    width: 100%;
+    left: 10%;
+    top:  4%;
+    font-weight: bold;
+    border-collapse: collapse;
+}
+.pos1 th{
+    display: block;
+    padding: 6%;
+    font-size: calc(110.5% + 0.1vw);
+}
+.pos1 td{
+    display: block;
+    padding: 6%;
+    font-size: calc(110.5% + 0.1vw);
+    border-width: 1px 0px 0px 0px;
+    border-color: #dddddd;
+    border-style: solid;
+}
+header .pos1 tr th a{
+    color: #111111;
+}
+header .pos1 tr th a:hover{
+    color: #fa0061;
+}
+header .pos1 tr:nth-of-type(3) a{
+    color: #fa0061;
+}
+header .pos1 tr td a{
+    color: #111111;
+}
+header .pos1 tr td a:hover{
+    color: #fa0061;
+}
+/*上 header 下 section2 */
+
+.section2{
+    max-width: 60%;
+    text-align: left;
+    margin-left: auto;
+    margin-right:auto;
+}
+.switch3{
+    margin-left: auto;
+    margin-right:auto;
+    text-align: center;
+    border-collapse: separate;
+    max-width: 60%;
+}
+.section2 .head1{
+    font-size: calc(100.5% + 2vw);
+}
+.text2, .ajust3{
+    font-size: calc(120.5% + 0.1vw);
+}
+.text2 a{
+    color: #fa0061;
+}
+.text2 a:hover{
+    color: #fa0061;
+    text-decoration: none;
+}
+.head2{
+    color: #fa0061
+}
+.text3{
+    font-size: calc(130.5% + 0.1vw);
+}
+@media all and (-ms-high-contrast: none){ /*IE用のサイズ調整*/
+    .text2{
+        font-size: calc(20px + 0.4vw);
+    }
+    .text3{
+        font-size: calc(22px + 0.6vw);
+    }
+    .ajust3{
+        font-size: calc(20px + 0.4vw);
+    }
+}
+@media screen and (min-width: 1021px){
+    .sae{max-width:50%;}
+    .pos2{text-align: center;}
+}
+@media screen and (min-width: 768px) and (max-width: 1020px){
+    .section2, .switch3{
+        max-width: 70%;
+    }
+    .sae{max-width:60%;}
+    .pos2{text-align: center;}
+}
+@media screen and (min-width: 420px) and (max-width: 767px){
+    .section2, .switch3{
+        max-width: 75%;
+    }
+    .text2, .ajust3{
+        font-size: calc(100.5% + 0.1vw);
+    }
+    .text3{
+        font-size: calc(110.5% + 0.1vw);
+    }
+    .sae{max-width:70%;}
+    .pos2{text-align: center;}
+}
+@media screen and (max-width: 419px){
+    .section2, .switch3{
+        max-width: 80%;
+    }
+    .text2, .ajust3{
+        font-size: calc(88% + 0.1vw);
+    }
+    .text3{
+        font-size: calc(98% + 0.1vw);
+    }
+    .sae{max-width:80%;}
+    .pos2{text-align: center;}
+}
+.table3 td{
+    width: 100%;
+    float: left;
+    text-align: left;
+}
+.ajust3{
+    width: 100%;
+}
+.ajust4{
+    text-align: center;
+}
+@media screen and (min-width: 1020px){
+    .ajust4{
+        width:30%;
+    }
+}
+@media screen and (max-width: 1020px){
+    .table3{width: 100%; border:none; padding: 10px;}
+    .switch3 th{
+        display: block;
+    }
+    .switch3 td{
+        border-bottom: none;
+        display: block;
+    }
+}
+.des{color: #d9d9d9}
+.cos{color: #bfbfbf}
+.pre{color: #a6a6a6}
+.acc{color: #b5c7e6}
+.skd{color: #90abda}
+.atx{color: #4674c1}
+.end{color: #213963}
+.eff{color: #72ac4d}
+/*上 section2 & table2 下 footer*/
+
+footer{
+    color: #fff;
+    text-align: center;
+    background-color: #373737;
+    padding-bottom: 10px;
+}
+.ft{
+    padding-top: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.sns1{
+    width: 50px;
+}
+.sns2{
+    width: 58px;
+}
+@media all and (-ms-high-contrast: none){
+    .ft{
+        font-size: calc(16px + 0.2vw);
+    }
+    .sns1{
+        width: 100px;
+    }
+    .sns2{
+        width: 108px;
+    }
+}
